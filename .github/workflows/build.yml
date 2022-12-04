@@ -1,0 +1,39 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: install requirements
+      run: apt install build-essential subversion git-core libncurses5-dev zlib1g-dev gawk flex quilt libssl-dev xsltproc libxml-parser-perl\
+        mercurial bzr ecj cvs unzip lib32z1 lib32z1-dev lib32stdc++6 libstdc++6 libmpc-dev libgmp-dev -y
+        
+    - name: download requirements
+      run: |
+        wget http://dl.mangopi.cc/tina/prebuilt.tar.gz . && tar xzvf prebuilt.tar.gz
+        wget http://dl.mangopi.cc/tina/dl.tar . && tar xvf dl.tar
+        wget http://dl.mangopi.cc/tina/toolchain/riscv64-linux-x86_64-20200528.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
+        wget http://dl.mangopi.cc/tina/toolchain/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabi.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
+    
+    - name: update submodules
+      run: git submodule update --init --recursive
+
+    - name: compile
+      run: |
+        source build/envsetup.sh
+        lunch 5
+    
+    - name: make
+      run: make && mboot && pack
+      
+    
