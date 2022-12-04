@@ -40,8 +40,8 @@ jobs:
       run: |
         wget -nv http://89.208.105.226:8080/temporary/riscv64-linux-x86_64-20200528.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
         wget -nv http://89.208.105.226:8080/temporary/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabi.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
-        wget -nv http://89.208.105.226:8080/temporary/prebuilt.tar.gz . && tar xzvf prebuilt.tar.gz
-        wget -nv http://89.208.105.226:8080/temporary/dl.tar . && tar xvf dl.tar
+        wget -nv http://89.208.105.226:8080/temporary/prebuilt.tar.gz && tar xzvf prebuilt.tar.gz
+        wget -nv http://89.208.105.226:8080/temporary/dl.tar && tar xvf dl.tar
 #        wget -nv http://dl.mangopi.cc/tina/prebuilt.tar.gz . && tar xzvf prebuilt.tar.gz
 #        wget -nv http://dl.mangopi.cc/tina/dl.tar . && tar xvf dl.tar
 #        wget -nv http://dl.mangopi.cc/tina/toolchain/riscv64-linux-x86_64-20200528.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
