@@ -21,17 +21,31 @@ jobs:
           
     - name: Update submodules
       run: git submodule update --init --recursive
+      
+    - name: Cache downloads
+      id: cache-downloads
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-downloaded-files
+      with:
+        path: |
+          prebuilt.tar.gz
+          dl.tar
+          lichee/brandy-2.0/tools/toolchain/riscv64-linux-x86_64-20200528.tar.xz
+          lichee/brandy-2.0/tools/toolchain/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabi.tar.xz
+        key: ${{ runner.os }}-build-${{ env.cache-name }}
         
-    - name: Download requirements
+    - if: ${{ steps.cache-downloads.outputs.cache-hit != 'true' }}
+      name: Download requirements
       run: |
-        wget http://89.208.105.226:8080/temporary/prebuilt.tar.gz . && tar xzvf prebuilt.tar.gz
-        wget http://89.208.105.226:8080/temporary/dl.tar . && tar xvf dl.tar
-        wget http://89.208.105.226:8080/temporary/riscv64-linux-x86_64-20200528.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
-        wget http://89.208.105.226:8080/temporary/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabi.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
-#        wget http://dl.mangopi.cc/tina/prebuilt.tar.gz . && tar xzvf prebuilt.tar.gz
-#        wget http://dl.mangopi.cc/tina/dl.tar . && tar xvf dl.tar
-#        wget http://dl.mangopi.cc/tina/toolchain/riscv64-linux-x86_64-20200528.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
-#        wget http://dl.mangopi.cc/tina/toolchain/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabi.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
+        wget -nv http://89.208.105.226:8080/temporary/riscv64-linux-x86_64-20200528.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
+        wget -nv http://89.208.105.226:8080/temporary/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabi.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
+        wget -nv http://89.208.105.226:8080/temporary/prebuilt.tar.gz . && tar xzvf prebuilt.tar.gz
+        wget -nv http://89.208.105.226:8080/temporary/dl.tar . && tar xvf dl.tar
+#        wget -nv http://dl.mangopi.cc/tina/prebuilt.tar.gz . && tar xzvf prebuilt.tar.gz
+#        wget -nv http://dl.mangopi.cc/tina/dl.tar . && tar xvf dl.tar
+#        wget -nv http://dl.mangopi.cc/tina/toolchain/riscv64-linux-x86_64-20200528.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
+#        wget -nv http://dl.mangopi.cc/tina/toolchain/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabi.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
         
     - name: Configure
       run: |
