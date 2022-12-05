@@ -47,12 +47,6 @@ jobs:
 #        wget -nv http://dl.mangopi.cc/tina/toolchain/riscv64-linux-x86_64-20200528.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
 #        wget -nv http://dl.mangopi.cc/tina/toolchain/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabi.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
         
-    - name: Configure
-      run: source build/envsetup.sh
-    
-    - name: Lunch it!
-      run: lunch 5
-    
-    - name: Make
-      run: make && mboot && pack
+    - name: Configure and make
+      run: source build/envsetup.sh && lunch 5 && make && mboot && pack
   
