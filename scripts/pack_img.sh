@@ -2152,3 +2152,5 @@ fi
 
 [ -e ${PACK_TOPDIR}/scripts/.hooks/post-pack ] &&
 	source ${PACK_TOPDIR}/scripts/.hooks/post-pack
+
+exit 0
