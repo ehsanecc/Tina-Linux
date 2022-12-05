@@ -48,7 +48,7 @@ jobs:
 #        wget -nv http://dl.mangopi.cc/tina/toolchain/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabi.tar.xz -P ./lichee/brandy-2.0/tools/toolchain/
         
     - name: Configure and make
-      run: source build/envsetup.sh && lunch 5 && make && mboot && pack
+      run: (source build/envsetup.sh && lunch 5 && make && mboot && pack) || true
       
     - name: Enviroment set
       run: |
