@@ -59,7 +59,7 @@ jobs:
     - name: Upload result as release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "Tina-Linux/out/*"
+        artifacts: "Tina-Linux/out/f133-mq_r/*.img"
 #        body: ""
         token: ${{ secrets.GITHUB_TOKEN }}
         tag: ${{ env.TAG_NAME }}
