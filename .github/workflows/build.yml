@@ -38,10 +38,10 @@ jobs:
     - if: ${{ steps.cache-downloads.outputs.cache-hit != 'true' }}
       name: Download requirements
       run: |
-        wget -nv http://dl.mangopi.cc/tina/prebuilt.tar.gz . && tar xzf prebuilt.tar.gz
-        wget -nv http://dl.mangopi.cc/tina/dl.tar . && tar xf dl.tar
-        wget -nv http://dl.mangopi.cc/tina/toolchain/riscv64-linux-x86_64-20200528.tar.xz -P lichee/brandy-2.0/tools/toolchain/
-        wget -nv http://dl.mangopi.cc/tina/toolchain/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabi.tar.xz -P lichee/brandy-2.0/tools/toolchain/
+        wget -nv http://dl.mangopi.org/tina/prebuilt.tar.gz . && tar xzf prebuilt.tar.gz
+        wget -nv http://dl.mangopi.org/tina/dl.tar . && tar xf dl.tar
+        wget -nv http://dl.mangopi.org/tina/toolchain/riscv64-linux-x86_64-20200528.tar.xz -P lichee/brandy-2.0/tools/toolchain/
+        wget -nv http://dl.mangopi.org/tina/toolchain/gcc-linaro-7.2.1-2017.11-x86_64_arm-linux-gnueabi.tar.xz -P lichee/brandy-2.0/tools/toolchain/
         
     - name: Extract requirements
       run: |
