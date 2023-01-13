@@ -17,7 +17,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install build-essential subversion git-core libncurses5-dev zlib1g-dev gawk flex quilt libssl-dev xsltproc libxml-parser-perl \
-          mercurial bzr ecj cvs unzip lib32z1 lib32z1-dev lib32stdc++6 libstdc++6 libmpc-dev libgmp-dev -y
+          mercurial bzr ecj cvs unzip lib32z1 lib32z1-dev lib32stdc++6 libstdc++6 libmpc-dev libgmp-dev tree -y
           
     - name: Update submodules
       run: git submodule update --init --recursive
@@ -51,6 +51,11 @@ jobs:
     - name: Configure and make
       run: (source build/envsetup.sh && lunch 5 && make && mboot && pack) || true
       
+    - name: Folder tree
+      run: |
+        echo "tree listing of '$PWD'"
+        tree
+      
     - name: Enviroment set
       run: |
           echo "TAG_NAME=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
@@ -59,7 +64,7 @@ jobs:
     - name: Upload result as release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "Tina-Linux/Tina-Linux/out/*"
+        artifacts: "Tina-Linux/*"
 #        body: ""
         token: ${{ secrets.GITHUB_TOKEN }}
         tag: ${{ env.TAG_NAME }}
